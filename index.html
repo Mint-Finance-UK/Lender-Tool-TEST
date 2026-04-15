@@ -94,7 +94,7 @@
 
         .filter-row {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 0.5rem;
         }
 
@@ -484,7 +484,7 @@
     <div class="filter-container">
         <div class="filter-content">
             <div class="filter-rows">
-                <!-- Row 1 -->
+                <!-- Row 1: Lender, Loan Amount, Company Trading, PG Required -->
                 <div class="filter-row">
                     <div class="filter-group">
                         <label for="lenderSelect">Lender</label>
@@ -502,34 +502,9 @@
                     </div>
 
                     <div class="filter-group">
-                        <label for="termMonths">Loan Term (Months)</label>
-                        <input type="number" id="termMonths" class="filter-input" placeholder="Enter term in months..." min="0">
-                    </div>
-
-                    <div class="filter-group">
                         <label for="tradingTime">Company Trading (Months)</label>
                         <input type="number" id="tradingTime" class="filter-input" placeholder="Enter trading timeframe in months..." min="0">
                     </div>
-
-                    <div class="filter-group">
-                        <label for="monthlyTurnover">Company Turnover (£ per month)</label>
-                        <input type="number" id="monthlyTurnover" class="filter-input" placeholder="Enter monthly turnover..." min="0" max="5000000" step="1000">
-                    </div>
-                </div>
-
-                <!-- Row 2 -->
-                <div class="filter-row">
-                    <div class="filter-group">
-                        <label for="productType">Product Type</label>
-                        <div class="multi-select" id="productTypeSelect">
-                            <div class="multi-select-display" onclick="toggleMultiSelect('productType')">
-                                <span class="multi-select-placeholder">Select product type...</span>
-                            </div>
-                            <div class="multi-select-dropdown" id="productTypeDropdown"></div>
-                        </div>
-                    </div>
-
-
 
                     <div class="filter-group">
                         <label for="pgRequirement">PG Required</label>
@@ -542,6 +517,29 @@
                                 <div class="single-select-option" onclick="selectSingleOption('pgRequirement', 'no')">No</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Product Type, Loan Term, Company Turnover, Homeowner Requirement -->
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="productType">Product Type</label>
+                        <div class="multi-select" id="productTypeSelect">
+                            <div class="multi-select-display" onclick="toggleMultiSelect('productType')">
+                                <span class="multi-select-placeholder">Select product type...</span>
+                            </div>
+                            <div class="multi-select-dropdown" id="productTypeDropdown"></div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="termMonths">Loan Term (Months)</label>
+                        <input type="number" id="termMonths" class="filter-input" placeholder="Enter term in months..." min="0">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="monthlyTurnover">Company Turnover (£ per month)</label>
+                        <input type="number" id="monthlyTurnover" class="filter-input" placeholder="Enter monthly turnover..." min="0" max="5000000" step="1000">
                     </div>
 
                     <div class="filter-group">
