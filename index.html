@@ -1074,17 +1074,21 @@
 
         function applyFilters() {
             try {
-                const loanAmount = parseFloat(domElements.loanAmount?.value) || null;
-                const termMonths = parseInt(domElements.termMonths?.value) || null;
-                const tradingTime = parseInt(domElements.tradingTime?.value) || null;
-                const monthlyTurnover = parseFloat(domElements.monthlyTurnover?.value) || null;
+                const loanAmountVal = domElements.loanAmount?.value;
+                const loanAmount = loanAmountVal !== '' && loanAmountVal != null ? parseFloat(loanAmountVal) : null;
+                const termMonthsVal = domElements.termMonths?.value;
+                const termMonths = termMonthsVal !== '' && termMonthsVal != null ? parseInt(termMonthsVal) : null;
+                const tradingTimeVal = domElements.tradingTime?.value;
+                const tradingTime = tradingTimeVal !== '' && tradingTimeVal != null ? parseInt(tradingTimeVal) : null;
+                const monthlyTurnoverVal = domElements.monthlyTurnover?.value;
+                const monthlyTurnover = monthlyTurnoverVal !== '' && monthlyTurnoverVal != null ? parseFloat(monthlyTurnoverVal) : null;
 
                 filteredData = lenderData.filter(lender => {
                     if (selectedLenders.length > 0 && !selectedLenders.includes(lender.LENDER)) return false;
-                    if (loanAmount && (loanAmount < lender.MIN_LOAN_NUM || (lender.MAX_LOAN_NUM > 0 && loanAmount > lender.MAX_LOAN_NUM))) return false;
-                    if (termMonths && (termMonths < lender.MIN_TERM || (lender.MAX_TERM > 0 && termMonths > lender.MAX_TERM))) return false;
-                    if (tradingTime && tradingTime < lender.MIN_TRADING_TIME) return false;
-                    if (monthlyTurnover && lender.MIN_TURNOVER && monthlyTurnover < lender.MIN_MONTHLY_TURNOVER) return false;
+                    if (loanAmount !== null && (loanAmount < lender.MIN_LOAN_NUM || (lender.MAX_LOAN_NUM > 0 && loanAmount > lender.MAX_LOAN_NUM))) return false;
+                    if (termMonths !== null && (termMonths < lender.MIN_TERM || (lender.MAX_TERM > 0 && termMonths > lender.MAX_TERM))) return false;
+                    if (tradingTime !== null && tradingTime < lender.MIN_TRADING_TIME) return false;
+                    if (monthlyTurnover !== null && lender.MIN_TURNOVER && monthlyTurnover < lender.MIN_MONTHLY_TURNOVER) return false;
                     
                     if (selectedProductTypes.length > 0 && lender.PRODUCT_TYPE && lender.PRODUCT_TYPE.trim() !== '') {
                         const lenderProductTypes = lender.PRODUCT_TYPE.split(', ').map(t => t.trim());
