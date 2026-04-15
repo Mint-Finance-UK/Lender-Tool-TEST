@@ -745,6 +745,7 @@
                         ADDITIONAL_CRITERIA: (row['Additional Criteria'] || '').toString().trim(),
                         PRODUCT_USP: (row['Product USP'] || '').toString().trim(),
                         SUBMISSION: (row['Submission'] || '').toString().trim(),
+                        LAST_UPDATED: (row['Last Updated'] || '').toString().trim(),
                         MINT_FINANCE_PANEL: mintFinancePanel,
                         MIN_LOAN_NUM: minLoan,
                         MAX_LOAN_NUM: maxLoan,
@@ -1171,6 +1172,8 @@
                         } else {
                             interestDisplay = `Up to ${lender.MONTHLY_INTEREST_TO}% monthly`;
                         }
+                    } else {
+                        interestDisplay = 'Not specified';
                     }
                     
                     const productBadge = lender.PRODUCT_TYPE && lender.PRODUCT_TYPE.trim() !== '' ? 
@@ -1192,8 +1195,8 @@
                         `<div class="panel-indicators">${panelIndicators.join('')}</div>` : '';
                     
                     const criteriaItems = [];
-                    if (lender.MIN_TRADING_TIME > 0) criteriaItems.push(`Min Trading: ${lender.MIN_TRADING_TIME} months`);
-                    if (lender.MIN_TURNOVER > 0) criteriaItems.push(`Min Turnover: ${formatCurrency(lender.MIN_TURNOVER)}/month`);
+                    criteriaItems.push(`Min Trading: ${lender.MIN_TRADING_TIME} months`);
+                    criteriaItems.push(`Min Turnover: ${formatCurrency(lender.MIN_TURNOVER)}/month`);
                     if (lender.LOCATION && lender.LOCATION.trim() !== '') {
                         const shortLocation = lender.LOCATION
                             .replace('England', 'Eng')
@@ -1223,22 +1226,23 @@
                         <tr>
                             <td style="text-align: left;">
                                 <div class="lender-name">${escapeHtml(lender.LENDER)}</div>
-                                <div style="margin-top: 0.25rem; text-align: left;">
-                                    ${productBadge}
-                                </div>
                                 ${panelIndicatorsHtml}
                                 <div style="margin-top: 0.25rem; text-align: left;">
                                     ${submissionLink}
                                 </div>
+                                ${lender.LAST_UPDATED && lender.LAST_UPDATED.trim() !== '' ? `<div style="margin-top: 0.25rem; font-size: 0.75rem; color: #6c757d;">Updated: ${escapeHtml(lender.LAST_UPDATED)}</div>` : ''}
                             </td>
                             <td>
+                                <div style="margin-bottom: 0.25rem;">
+                                    ${productBadge}
+                                </div>
                                 <div class="amount-range">
                                     ${amountRange}
                                 </div>
                                 <div class="term-range" style="margin-top: 0.25rem;">
                                     ${termRange}
                                 </div>
-                                ${interestDisplay ? `<div class="interest-range" style="margin-top: 0.25rem;">${interestDisplay}</div>` : ''}
+                                <div class="interest-range" style="margin-top: 0.25rem;">${interestDisplay}</div>
                             </td>
                             <td>
                                 ${securityItems.length > 0 ? 
