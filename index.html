@@ -1229,7 +1229,7 @@
                         criteriaItems.push('Location: Not Specified');
                     }
                     if (lender.ADDITIONAL_CRITERIA && lender.ADDITIONAL_CRITERIA.trim() !== '') {
-                        criteriaItems.push(...lender.ADDITIONAL_CRITERIA.split(',').slice(0, 2).map(criteria => 
+                        criteriaItems.push(...lender.ADDITIONAL_CRITERIA.split(',').map(criteria => 
                             escapeHtml(criteria.trim())
                         ).filter(c => c.length > 0));
                     }
@@ -1241,7 +1241,7 @@
                     
                     // USP items from Product USP field
                     const uspItems = lender.PRODUCT_USP && lender.PRODUCT_USP.trim() !== '' ? 
-                        lender.PRODUCT_USP.split(',').slice(0, 3).map(usp => 
+                        lender.PRODUCT_USP.split(',').map(usp => 
                             escapeHtml(usp.trim())
                         ).filter(u => u.length > 0) : [];
 
