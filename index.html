@@ -626,17 +626,6 @@
                     }
                 });
                 
-                // Interest fields validation
-                const interestFields = ['Monthly Interest From', 'Monthly Interest To'];
-                interestFields.forEach(field => {
-                    const value = row[field];
-                    if (value !== '' && value !== null && value !== undefined) {
-                        const numValue = Number(value);
-                        if (isNaN(numValue) || numValue < 0) {
-                            errors.push(`Row ${rowNum}: ${field} must be a valid positive number (found: "${value}")`);
-                        }
-                    }
-                });
                 
                 const minLoan = Number(row['Min Loan']) || 0;
                 const maxLoan = Number(row['Max Loan']) || 0;
